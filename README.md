@@ -20,7 +20,7 @@ In your `FeatureContext` class
     public function __construct(array $parameters) 
     {
         $client = new Guzzle\Http\Client('http://api.twitter.com/1');
-        $this->useContext(new Behest\Behat\Context\BehestContext($client));
+        $this->useContext('behest', new Behest\Behat\Context\BehestContext($client));
     }
 
 ```
