@@ -104,9 +104,9 @@ class BehestContext extends BehatContext
     }
 
     /**
-     * @Then /^the response status code should be "([^"]*)"$/
+     * @Then /^the api response status code should be "([^"]*)"$/
      */
-    public function theResponseStatusCodeShouldBe($code)
+    public function theApiResponseStatusCodeShouldBe($code)
     {
         $message = sprintf('Status code was "%d", but "%d" expected', $this->response->getStatusCode(), $code);
         assertEquals($code, $this->response->getStatusCode(), $message); 
