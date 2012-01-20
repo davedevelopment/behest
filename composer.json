@@ -1,5 +1,21 @@
 {
+
+    "name": "behest/behest",
+    "type": "library",
+    "description": "REST client context for behat",
+    "keywords": ["behat","REST"],
+    "homepage": "http://github.com/davedevelopment/behest",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dave Marshall",
+            "email": "dave.marshall@atstsolutions.co.uk",
+            "homepage": "http://davedevelopment.co.uk"
+        }
+    ],
+
     "require": {
+        "php": ">=5.3.0",
         "behat/behat": ">=2.2.2",
         "guzzle/guzzle": ">=2.0.2"
     },
