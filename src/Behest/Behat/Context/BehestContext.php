@@ -42,6 +42,21 @@ class BehestContext extends BehatContext
     protected $exception;
 
     /**
+     * @var string
+     */
+    protected $username;
+
+    /**
+     * @var string
+     */
+    protected $password;
+
+    /**
+     * @var string
+     */
+    protected $httpAuthType;
+
+    /**
      * @var array
      *
      * Headers for the next request
@@ -138,13 +153,43 @@ class BehestContext extends BehatContext
     protected function send($method, $path, $body = '')
     {
         $this->request = $this->client->{$method}($path, $body);
-        $this->request->addHeaders($this->headers);
+        $this->addHeaders($this->request);
+        $this->addAuth($this->request);
         try {
             $this->response = $this->request->send();
         } catch (BadResponseException $he) {
             $this->response = $he->getResponse();
             $this->exception = $he;
         }
+    }
+
+    /**
+     * Add any authentication to the request, pulled out to here so it can be
+     * extended etc
+     *
+     * @param Request $request
+     */
+    protected function addAuth(Request $request)
+    {
+        if ($this->username !== null) {
+            switch ($this->httpAuthType) {
+
+                case CURLAUTH_BASIC:
+                case CURLAUTH_DIGEST:
+                    $request->setAuth($this->username, $this->password, $this->httpAuthType);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Add any headers, pulled out to here so it can extended etc
+     *
+     * @param Request $request
+     */
+    protected function addHeaders(Request $request)
+    {
+        $request->addHeaders($this->headers);
     }
 
     /**
@@ -156,6 +201,10 @@ class BehestContext extends BehatContext
          * Reset things
          */
         $this->headers = array();
+        $this->request = null;
+        $this->response = null;
+        $this->username = null;
+        $this->password = null;
     }
 }
 
