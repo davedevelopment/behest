@@ -59,6 +59,28 @@ class BehestContext extends BehatContext
     }
 
     /**
+     * Set client
+     * 
+     * @param Client $client
+     * @return BehestContext
+     */
+    public function setClient(Client $client)
+    {
+        $this->client = $client;
+        return $this;
+    }
+
+    /**
+     * Get Client
+     *
+     * @return Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * @When /^I send a GET request to "([^"]*)"$/
      */
     public function iSendAGetRequestTo($path)
