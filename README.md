@@ -15,6 +15,7 @@ Usage
 In your `FeatureContext` class
 
 ``` php
+<?php 
 
     public function __construct(array $parameters) 
     {
