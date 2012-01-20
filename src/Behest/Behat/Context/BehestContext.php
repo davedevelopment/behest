@@ -214,7 +214,7 @@ class BehestContext extends BehatContext
     /**
      * @BeforeScenario
      */
-    public function init()
+    public function initBehestContext()
     {
         /**
          * Reset things
