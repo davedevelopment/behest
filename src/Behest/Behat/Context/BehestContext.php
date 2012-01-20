@@ -121,25 +121,43 @@ class BehestContext extends BehatContext
     }
 
     /**
-     * @Given /^I print the last response body$/
+     * @Given /^I print the last (request|response) body$/
      */
-    public function iPrintTheLastResponseBody()
+    public function iPrintTheLastResponseBody($type)
     {
-        $this->printDebug($this->response->getBody(true));
+        $this->printDebug($this->{$type}->getBody(true));
     }
 
     /**
-     * @Given /^I print the last response headers$/
+     * @Given /^I print the last (response|request) headers$/
      */
-    public function iPrintTheLastResponseHeaders()
+    public function iPrintTheLastResponseHeaders($type)
     {
         $headers = '';
-        foreach($this->response->getHeaders() as $key => $value) {
+        foreach($this->{$type}->getHeaders() as $key => $value) {
             $headers.= $key . ': ' . $value . PHP_EOL;
         };
 
         $this->printDebug($headers);
     }
+
+    /**
+     * @Given /^I am api user "([^"]*)" with the password "([^"]*)"$/
+     */
+    public function iAmApiUserWithThePassword($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
+
+    /**
+     * @Given /^I send "([^"]*)" authentication$/
+     */
+    public function iSendAuthentication($type)
+    {
+        $this->httpAuthType = $type;
+    }
+
 
     /**
      * Send the request
@@ -173,10 +191,11 @@ class BehestContext extends BehatContext
     {
         if ($this->username !== null) {
             switch ($this->httpAuthType) {
-
-                case CURLAUTH_BASIC:
-                case CURLAUTH_DIGEST:
-                    $request->setAuth($this->username, $this->password, $this->httpAuthType);
+                case 'basic':
+                    $request->setAuth($this->username, $this->password, CURLAUTH_BASIC);
+                    break;
+                case 'digest':
+                    $request->setAuth($this->username, $this->password, CURLAUTH_DIGEST);
                     break;
             }
         }
