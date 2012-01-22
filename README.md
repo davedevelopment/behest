@@ -34,3 +34,30 @@ Then in your feature files
 ```
 
 See the features directory for more usage examples, or run `bin/behat -dl`
+
+
+Coming Soon
+-----------
+
+PUT, POST, DELETE, etc
+
+Possibly include some json steps ala collectiveidea/json_spec, although it might
+be better to include that in a different library. For my current project, I've
+got the following working
+
+``` cucumber
+
+    Then the JSON response at "results/0/_embedded/profile/first_name" should be "Dave"
+    And the JSON response should have "2" "results"
+
+```
+
+I'd also like a way of following urls to support discoverable hypermedia etc,
+something like
+
+``` cucumber
+
+    And I remember the JSON response at "results/0/_embedded/profile/_links/self/href" as "url"
+    When I send a GET request to "%{url}"
+
+```
