@@ -6,6 +6,7 @@ use Guzzle\Http\Message\Response;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\BadResponseException;
 
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Context\BehatContext;
 use Behat\Behat\Exception\PendingException;
 
@@ -104,6 +105,14 @@ class BehestContext extends BehatContext
     }
 
     /**
+     * @When /^I send a POST request to "([^"]*)" with the following:$/
+     */
+    public function iSendAPostRequestToWithTheFollowing($url, PyStringNode $data)
+    {
+        $this->send('POST', $url, (string) $data);
+    }
+
+    /**
      * @Then /^the api response status code should be "([^"]*)"$/
      */
     public function theApiResponseStatusCodeShouldBe($code)
@@ -166,6 +175,14 @@ class BehestContext extends BehatContext
         $this->httpAuthType = $type;
     }
 
+    /**
+     * @Given /^the response body should contain "([^"]*)"$/
+     */
+    public function theResponseBodyShouldContain($test)
+    {
+        $data = $this->response->getBody(true);
+        assertTrue(false !== strpos($data, $test));
+    }
 
     /**
      * Send the request
@@ -178,7 +195,7 @@ class BehestContext extends BehatContext
      */
     protected function send($method, $path, $body = '')
     {
-        $this->request = $this->client->{$method}($path, $body);
+        $this->request = $this->client->{$method}($path, array(), $body);
         $this->addHeaders($this->request);
         $this->addAuth($this->request);
         try {
