@@ -121,6 +121,14 @@ class BehestContext extends BehatContext
     }
 
     /**
+     * @Given /^I send "([^"]*)"$/
+     */
+    public function iSend($contentType)
+    {
+        $this->headers['Content-Type'] = $contentType;
+    }
+
+    /**
      * @Given /^I print the last (request|response) body$/
      */
     public function iPrintTheLastResponseBody($type)
