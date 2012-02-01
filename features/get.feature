@@ -25,6 +25,7 @@ Scenario: Use an Accept header
     Given I accept "application/json"
     When I send a GET request to "/request-info.php"
     Then the api response status code should be "200"
-    And the response body should contain "Accept: application/json"
+    And the last response body should contain "Accept: application/json"
+    And the last response "Content-Type" header should contain "application/json"
 
 

@@ -176,13 +176,23 @@ class BehestContext extends BehatContext
     }
 
     /**
-     * @Given /^the response body should contain "([^"]*)"$/
+     * @Given /^the last response body should contain "([^"]*)"$/
      */
     public function theResponseBodyShouldContain($test)
     {
         $data = $this->response->getBody(true);
         assertTrue(false !== strpos($data, $test));
     }
+
+    /**
+     * @Given /^the last response "([^"]*)" header should contain "([^"]*)"$/
+     */
+    public function theLastResponseHeaderShouldContain($key, $val)
+    {
+        $data = $this->response->getHeader($key);
+        assertTrue(false !== strpos($data, $val));
+    }
+
 
     /**
      * Send the request

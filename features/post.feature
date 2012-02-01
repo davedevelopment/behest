@@ -10,5 +10,5 @@ Scenario: Send a post with content-type
         DAVEDAVEDAVE
         """
     Then the api response status code should be "200" 
-    And the response body should contain "Content-type: application/json"
-    And the response body should contain "Input: DAVEDAVEDAVE"
+    And the last response body should contain "Content-type: application/json"
+    And the last response body should contain "Input: DAVEDAVEDAVE"

@@ -11,6 +11,9 @@
  *
  * @author      Dave Marshall <dave.marshall@atstsolutions.co.uk>
  */
+$contentType = (isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : 'text/html');
+header("Content-Type: $contentType");
+
 
 echo "Content-type: " . (isset($_SERVER['CONTENT_TYPE']) ? $_SERVER['CONTENT_TYPE'] : '') . "\n";
 echo "Accept: " . $_SERVER['HTTP_ACCEPT'] . "\n";
