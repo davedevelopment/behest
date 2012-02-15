@@ -4,6 +4,13 @@ Behest - A simple REST client Behat Context
 Behest is a BehatContext that makes it easy for you to write features that call
 RESTful web services
 
+*WARNING*
+
+I've just found out that Behat itself as something similar in the works, so I'll
+probably stop working on this! Checkout
+https://github.com/Behat/CommonContexts/blob/master/Behat/CommonContexts/WebApiContext.php
+
+
 Installation
 ------------
 
