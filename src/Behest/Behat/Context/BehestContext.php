@@ -97,19 +97,11 @@ class BehestContext extends BehatContext
     }
 
     /**
-     * @When /^I send a GET request to "([^"]*)"$/
+     * @When /^I send a (POST|GET|PUT|DELETE) request to "([^"]*)"(?:| with the following:)$/
      */
-    public function iSendAGetRequestTo($path)
+    public function iSendARequestToWithTheFollowing($method, $url, PyStringNode $data = null)
     {
-        $this->send('GET', $path);
-    }
-
-    /**
-     * @When /^I send a POST request to "([^"]*)" with the following:$/
-     */
-    public function iSendAPostRequestToWithTheFollowing($url, PyStringNode $data)
-    {
-        $this->send('POST', $url, (string) $data);
+        $this->send($method, $url, (string) $data);
     }
 
     /**
