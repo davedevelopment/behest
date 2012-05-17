@@ -4,8 +4,7 @@ namespace Behest\Behat\Context;
 use Guzzle\Http\Client;
 use Guzzle\Http\Message\Response;
 use Guzzle\Http\Message\Request;
-use Guzzle\Http\Message\BadResponseException;
-use Guzzle\Http\Exception\ClientErrorResponseException;
+use Guzzle\Http\Exception\BadResponseException;
 
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Context\BehatContext;
@@ -204,9 +203,6 @@ class BehestContext extends BehatContext
         try {
             $this->response = $this->request->send();
         } catch (BadResponseException $he) {
-            $this->response = $he->getResponse();
-            $this->exception = $he;
-        } catch (ClientErrorResponseException $he) {
             $this->response = $he->getResponse();
             $this->exception = $he;
         }
