@@ -144,7 +144,9 @@ class BehestContext extends BehatContext
     {
         $headers = '';
         foreach($this->{$type}->getHeaders() as $key => $value) {
-            $headers.= $key . ': ' . $value . PHP_EOL;
+            foreach ((array) $value as $v) {
+                $headers.= $key . ': ' . $v . PHP_EOL;
+            }
         };
 
         $this->printDebug($headers);
